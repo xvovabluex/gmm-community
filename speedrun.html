@@ -127,6 +127,7 @@
         
         .speedrun-table tr:hover {
             background: rgba(142, 68, 173, 0.2);
+            cursor: pointer;
         }
         
         .place {
@@ -166,6 +167,18 @@
         
         .bronze {
             background: linear-gradient(135deg, #cd7f32, #a05a2c);
+        }
+        
+        .player-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .player-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
         }
         
         @keyframes fadeIn {
@@ -221,18 +234,18 @@
     </table>
     
     <script>
-        // Speedrun data
+        // Speedrun data with IDs
         const speedrun_array = [
-            {"player_nickname": "test", "timeforbeated": "00:16.09", "uploaded": "02.08.2025"},
-            {"player_nickname": "pro_gamer", "timeforbeated": "00:14.32", "uploaded": "01.08.2025"},
-            {"player_nickname": "speed_king", "timeforbeated": "00:12.45", "uploaded": "30.07.2025"},
-            {"player_nickname": "granny_hunter", "timeforbeated": "00:18.21", "uploaded": "28.07.2025"},
-            {"player_nickname": "noob_slayer", "timeforbeated": "00:15.67", "uploaded": "25.07.2025"},
-            {"player_nickname": "dark_shadow", "timeforbeated": "00:13.89", "uploaded": "20.07.2025"},
-            {"player_nickname": "lightning", "timeforbeated": "00:11.97", "uploaded": "15.07.2025"},
-            {"player_nickname": "ghost", "timeforbeated": "00:17.34", "uploaded": "10.07.2025"},
-            {"player_nickname": "ninja", "timeforbeated": "00:14.78", "uploaded": "05.07.2025"},
-            {"player_nickname": "legend", "timeforbeated": "00:10.23", "uploaded": "01.07.2025"}
+            {"id": 1, "player_nickname": "test", "timeforbeated": "00:16.09", "uploaded": "02.08.2025"},
+            {"id": 2, "player_nickname": "pro_gamer", "timeforbeated": "00:14.32", "uploaded": "01.08.2025"},
+            {"id": 3, "player_nickname": "speed_king", "timeforbeated": "00:12.45", "uploaded": "30.07.2025"},
+            {"id": 4, "player_nickname": "granny_hunter", "timeforbeated": "00:18.21", "uploaded": "28.07.2025"},
+            {"id": 5, "player_nickname": "noob_slayer", "timeforbeated": "00:15.67", "uploaded": "25.07.2025"},
+            {"id": 6, "player_nickname": "dark_shadow", "timeforbeated": "00:13.89", "uploaded": "20.07.2025"},
+            {"id": 7, "player_nickname": "lightning", "timeforbeated": "00:11.97", "uploaded": "15.07.2025"},
+            {"id": 8, "player_nickname": "ghost", "timeforbeated": "00:17.34", "uploaded": "10.07.2025"},
+            {"id": 9, "player_nickname": "ninja", "timeforbeated": "00:14.78", "uploaded": "05.07.2025"},
+            {"id": 10, "player_nickname": "legend", "timeforbeated": "00:10.23", "uploaded": "01.07.2025"}
         ];
 
         // Function to format date (show as "1 month ago" etc.)
@@ -270,6 +283,7 @@
             
             sortedData.forEach((run, index) => {
                 const row = document.createElement('tr');
+                row.dataset.runId = run.id;
                 
                 // Place with medal
                 let placeHtml = '';
@@ -279,10 +293,19 @@
                 
                 row.innerHTML = `
                     <td class="place">${placeHtml}${index + 1}</td>
-                    <td>${run.player_nickname}</td>
+                    <td><a href="/user/${run.player_nickname}" class="player-link">${run.player_nickname}</a></td>
                     <td class="time">${run.timeforbeated}</td>
                     <td class="date">${formatDate(run.uploaded)}</td>
                 `;
+                
+                // Add click handler for the entire row
+                row.addEventListener('click', (e) => {
+                    // Don't navigate if click was on player link (it will handle navigation itself)
+                    if (e.target.tagName === 'A') return;
+                    
+                    // Navigate to run page
+                    window.location.href = `/run/${run.id}`;
+                });
                 
                 leaderboard.appendChild(row);
             });
