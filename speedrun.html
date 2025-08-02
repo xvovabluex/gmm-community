@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granny Multiplayer Mod - Speedrun Table</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --table-row: rgba(255, 255, 255, 0.05);
+            --table-header: rgba(142, 68, 173, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(142, 68, 173, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(231, 76, 60, 0.2) 0%, transparent 50%);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), #3498db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .speedrun-table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 2rem;
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .speedrun-table th {
+            background: var(--table-header);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .speedrun-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .speedrun-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .speedrun-table tr:nth-child(even) {
+            background: var(--table-row);
+        }
+        
+        .speedrun-table tr:hover {
+            background: rgba(142, 68, 173, 0.2);
+        }
+        
+        .place {
+            font-weight: bold;
+            color: var(--accent);
+            width: 80px;
+            text-align: center;
+        }
+        
+        .time {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        .date {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        .medal {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .gold {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+        }
+        
+        .silver {
+            background: linear-gradient(135deg, #c0c0c0, #999999);
+        }
+        
+        .bronze {
+            background: linear-gradient(135deg, #cd7f32, #a05a2c);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .speedrun-table {
+                font-size: 0.9rem;
+            }
+            
+            .speedrun-table th, 
+            .speedrun-table td {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Replace with your actual logo image path -->
+        <img src="your-logo.png" alt="Granny Multiplayer Mod Logo" class="logo">
+        <h1>Granny Multiplayer Mod</h1>
+        <p class="subtitle">Speedrun Leaderboard</p>
+    </header>
+    
+    <div class="filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Last Week</button>
+        <button class="filter-btn">Last Month</button>
+        <button class="filter-btn">Last 3 Months</button>
+    </div>
+    
+    <table class="speedrun-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Игрок</th>
+                <th>Время</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard">
+            <!-- Records will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+    
+    <script>
+        // Speedrun data
+        const speedrun_array = [
+            {"player_nickname": "test", "timeforbeated": "00:16.09", "uploaded": "02.08.2025"},
+            {"player_nickname": "pro_gamer", "timeforbeated": "00:14.32", "uploaded": "01.08.2025"},
+            {"player_nickname": "speed_king", "timeforbeated": "00:12.45", "uploaded": "30.07.2025"},
+            {"player_nickname": "granny_hunter", "timeforbeated": "00:18.21", "uploaded": "28.07.2025"},
+            {"player_nickname": "noob_slayer", "timeforbeated": "00:15.67", "uploaded": "25.07.2025"},
+            {"player_nickname": "dark_shadow", "timeforbeated": "00:13.89", "uploaded": "20.07.2025"},
+            {"player_nickname": "lightning", "timeforbeated": "00:11.97", "uploaded": "15.07.2025"},
+            {"player_nickname": "ghost", "timeforbeated": "00:17.34", "uploaded": "10.07.2025"},
+            {"player_nickname": "ninja", "timeforbeated": "00:14.78", "uploaded": "05.07.2025"},
+            {"player_nickname": "legend", "timeforbeated": "00:10.23", "uploaded": "01.07.2025"}
+        ];
+
+        // Function to format date (show as "1 month ago" etc.)
+        function formatDate(dateStr) {
+            const dateParts = dateStr.split('.');
+            const uploadedDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+            const currentDate = new Date();
+            
+            const diffTime = Math.abs(currentDate - uploadedDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return "сегодня";
+            if (diffDays === 1) return "вчера";
+            if (diffDays < 30) return `${diffDays} дней назад`;
+            
+            const diffMonths = Math.floor(diffDays / 30);
+            if (diffMonths === 1) return "1 месяц назад";
+            if (diffMonths < 12) return `${diffMonths} месяцев назад`;
+            
+            const diffYears = Math.floor(diffMonths / 12);
+            return `${diffYears} год назад`;
+        }
+
+        // Function to render leaderboard
+        function renderLeaderboard(data = speedrun_array) {
+            const leaderboard = document.getElementById('leaderboard');
+            leaderboard.innerHTML = '';
+            
+            // Sort by time
+            const sortedData = [...data].sort((a, b) => {
+                const timeA = a.timeforbeated.replace(':', '').replace('.', '');
+                const timeB = b.timeforbeated.replace(':', '').replace('.', '');
+                return parseInt(timeA) - parseInt(timeB);
+            });
+            
+            sortedData.forEach((run, index) => {
+                const row = document.createElement('tr');
+                
+                // Place with medal
+                let placeHtml = '';
+                if (index === 0) placeHtml = '<span class="medal gold"></span>';
+                else if (index === 1) placeHtml = '<span class="medal silver"></span>';
+                else if (index === 2) placeHtml = '<span class="medal bronze"></span>';
+                
+                row.innerHTML = `
+                    <td class="place">${placeHtml}${index + 1}</td>
+                    <td>${run.player_nickname}</td>
+                    <td class="time">${run.timeforbeated}</td>
+                    <td class="date">${formatDate(run.uploaded)}</td>
+                `;
+                
+                leaderboard.appendChild(row);
+            });
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const currentDate = new Date();
+                let filteredData = [...speedrun_array];
+                
+                if (btn.textContent === 'Last Week') {
+                    const weekAgo = new Date(currentDate);
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    filteredData = speedrun_array.filter(run => {
+                        const runDate = new Date(run.uploaded.split('.').reverse().join('-'));
+                        return runDate >= weekAgo;
+                    });
+                } else if (btn.textContent === 'Last Month') {
+                    const monthAgo = new Date(currentDate);
+                    monthAgo.setMonth(monthAgo.getMonth() - 1);
+                    filteredData = speedrun_array.filter(run => {
+                        const runDate = new Date(run.uploaded.split('.').reverse().join('-'));
+                        return runDate >= monthAgo;
+                    });
+                } else if (btn.textContent === 'Last 3 Months') {
+                    const threeMonthsAgo = new Date(currentDate);
+                    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+                    filteredData = speedrun_array.filter(run => {
+                        const runDate = new Date(run.uploaded.split('.').reverse().join('-'));
+                        return runDate >= threeMonthsAgo;
+                    });
+                }
+                
+                renderLeaderboard(filteredData);
+            });
+        });
+
+        // Initial render
+        renderLeaderboard();
+    </script>
+</body>
+</html>
