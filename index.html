@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granny Multiplayer Mod</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(142, 68, 173, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(231, 76, 60, 0.2) 0%, transparent 50%);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        .logo {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), #3498db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 1.1rem;
+        }
+        
+        .platform-section {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .platform-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .platform-title i {
+            margin-right: 10px;
+        }
+        
+        .part {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .part:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .part-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .download-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .play-store {
+            background: linear-gradient(135deg, #00b894, #00a884);
+            color: white;
+        }
+        
+        .apkpure {
+            background: linear-gradient(135deg, #0984e3, #0765b3);
+            color: white;
+        }
+        
+        .app-store {
+            background: linear-gradient(135deg, #6c5ce7, #5649cc);
+            color: white;
+        }
+        
+        .coming-soon {
+            background: rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .platform-section {
+                padding: 1.5rem;
+            }
+            
+            .download-btn {
+                min-width: 160px;
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Replace with your actual logo image path -->
+        <img src="your-logo.png" alt="Granny Multiplayer Mod Logo" class="logo">
+        <h1>Granny Multiplayer Mod</h1>
+        <p class="subtitle">The ultimate multiplayer horror experience</p>
+    </header>
+    
+    <section class="platform-section">
+        <h2 class="platform-title"><i class="fab fa-android"></i> Android</h2>
+        
+        <div class="part">
+            <h3 class="part-title">Part 1</h3>
+            <div class="download-buttons">
+                <a href="#" class="download-btn play-store">
+                    <i class="fab fa-google-play"></i> Download Play Store
+                </a>
+                <a href="#" class="download-btn apkpure">
+                    <i class="fas fa-download"></i> Download Apkpure
+                </a>
+            </div>
+        </div>
+        
+        <div class="part">
+            <h3 class="part-title">Part 2</h3>
+            <div class="download-buttons">
+                <a href="#" class="download-btn play-store">
+                    <i class="fab fa-google-play"></i> Download Play Store
+                </a>
+                <a href="#" class="download-btn apkpure">
+                    <i class="fas fa-download"></i> Download Apkpure
+                </a>
+            </div>
+        </div>
+        
+        <div class="part">
+            <h3 class="part-title">Part 3</h3>
+            <div class="download-buttons">
+                <a class="download-btn coming-soon">
+                    <i class="far fa-clock"></i> Coming soon...
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="platform-section">
+        <h2 class="platform-title"><i class="fab fa-apple"></i> iOS</h2>
+        
+        <div class="part">
+            <h3 class="part-title">Part 1</h3>
+            <div class="download-buttons">
+                <a href="#" class="download-btn app-store">
+                    <i class="fab fa-app-store-ios"></i> Download App Store
+                </a>
+            </div>
+        </div>
+        
+        <div class="part">
+            <h3 class="part-title">Part 2</h3>
+            <div class="download-buttons">
+                <a class="download-btn coming-soon">
+                    <i class="far fa-clock"></i> Coming soon...
+                </a>
+            </div>
+        </div>
+        
+        <div class="part">
+            <h3 class="part-title">Part 3</h3>
+            <div class="download-buttons">
+                <a class="download-btn coming-soon">
+                    <i class="far fa-clock"></i> Coming soon...
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2023 Granny Multiplayer Mod. All rights reserved.</p>
+    </footer>
+</body>
+</html>
