@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/user/:any*",
+      "destination": "https://gmm-community.vercel.app/api/user.py?a=:any*"
+    },
+    {
+      "source": "/run/:any*",
+      "destination": "https://gmm-community.vercel.app/api/video.py?a=:any*"
+    },
+    {
+      "source": "/speedrun1",
+      "destination": "https://gmm-community.vercel.app/speedrun.html"
+    }
+  ]
+}
